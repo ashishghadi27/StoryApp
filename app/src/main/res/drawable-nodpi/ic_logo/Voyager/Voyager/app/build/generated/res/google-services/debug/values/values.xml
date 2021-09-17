@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">66613507933-hj08kufeaabfg2ei1cgv42v63n6ggovf.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://voyager-ce14c-default-rtdb.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">66613507933</string>
+    <string name="google_api_key" translatable="false">AIzaSyDFAFzUDcqp18yEfWBIIEJugfPQa4KfFYE</string>
+    <string name="google_app_id" translatable="false">1:66613507933:android:83e8a9f46914fe1ebc9ab4</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDFAFzUDcqp18yEfWBIIEJugfPQa4KfFYE</string>
+    <string name="google_storage_bucket" translatable="false">voyager-ce14c.appspot.com</string>
+    <string name="project_id" translatable="false">voyager-ce14c</string>
+</resources>
