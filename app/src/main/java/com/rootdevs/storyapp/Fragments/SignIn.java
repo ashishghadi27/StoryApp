@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.rootdevs.storyapp.Activities.MainActivity;
 import com.rootdevs.storyapp.Interfaces.AuthView;
 import com.rootdevs.storyapp.Presenters.AuthPresenter;
 import com.rootdevs.storyapp.R;
@@ -44,6 +45,7 @@ public class SignIn extends BaseFragment implements AuthView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dialog = getProgressDialog("Please wait", "Api Call in progress", false, getContext());
         presenter = new AuthPresenter(getContext(), this);
     }
 
@@ -93,15 +95,14 @@ public class SignIn extends BaseFragment implements AuthView {
     public void signInSuccess(JSONObject jsonObject) {
         Log.v("SUCCESS RESP", jsonObject.toString());
         try {
-            if(jsonObject.getString("message").equals("Valid User")){
-                JSONObject object = jsonObject.getJSONArray("response").getJSONObject(0);
-                saveUserDetails(object.getString("id"),
+            if(jsonObject.getString("message").equals("Success")){
+                JSONObject object = jsonObject.getJSONObject("response");
+                saveUserDetails(object.getString("userId"),
                         object.getString("name"),
-                        object.getString("age"),
-                        object.getString("height"),
-                        object.getString("weight"),
-                        object.getString("email"));
-
+                        object.getString("email"),
+                        object.getString("isAdmin"));
+                Intent intent = new Intent(requireActivity(), MainActivity.class);
+                startActivity(intent);
                 requireActivity().finish();
             }
             else getAlertDialog("Sign In Failed", "Invalid Email or Password", getContext()).show();
@@ -114,7 +115,7 @@ public class SignIn extends BaseFragment implements AuthView {
 
     @Override
     public void signInFailure(VolleyError e) {
-
+        getAlertDialog("Error", "Some Error Occurred", getContext()).show();
     }
 
     @Override
@@ -149,11 +150,11 @@ public class SignIn extends BaseFragment implements AuthView {
 
     @Override
     public void showProgress() {
-
+        dialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        dialog.dismiss();
     }
 }

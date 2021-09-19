@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.CategoriesFragment"
+    android:padding="10dp"
+    android:elevation="5dp"
+    android:id="@+id/card"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/middle_edittext">
+
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/category_title"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="20sp"
+        android:textColor="#252525"/>
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/remove"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is small description of thr above category. Checkout"
+        android:textSize="18sp"
+        android:fontFamily="@font/nunito_sans"
+        android:layout_below="@+id/categoryName"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/message_back"
+        android:padding="5dp"/>
+
+</RelativeLayout>

@@ -35,4 +35,8 @@
     <string name="update_smal_password">update password</string>
     <string name="enter_new_password">Enter New Password</string>
     <string name="or">or</string>
+    <string name="exit_app">Exit App</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="category_title">Category Title</string>
 </resources>

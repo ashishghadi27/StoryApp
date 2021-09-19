@@ -140,7 +140,7 @@ public class OtpVerification extends BaseFragment implements AuthView {
     public void otpReceived(JSONObject object) {
         otpSent = false;
         try {
-            if(object.getString("message").equals("Success")){
+            if(object.getString("message").equals("Otp Mailed Successfully")){
                 this.otp = object.getJSONObject("response").getString("otp");
                 message.setText(R.string.enter_otp_that_you_received_on_your_mail);
                 email.setVisibility(View.GONE);

@@ -50,21 +50,24 @@ public class BaseFragment extends Fragment {
         return builder.create();
     }
 
-    public void saveUserDetails(String id, String name, String age, String height, String weight, String email){
+    public void saveUserDetails(String id, String name,  String email, String isAdmin){
         SharedPreferences preferences = requireContext().getSharedPreferences("userDetails",  Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("id", id);
         editor.putString("name", name);
-        editor.putString("age", age);
-        editor.putString("height", height);
-        editor.putString("weight", weight);
         editor.putString("email", email);
+        editor.putString("isAdmin", isAdmin);
         editor.apply();
     }
 
     public String getUserId(){
         SharedPreferences preferences = requireContext().getSharedPreferences("userDetails",  Context.MODE_PRIVATE);
         return preferences.getString("id", null);
+    }
+
+    public boolean isAdmin(){
+        SharedPreferences preferences = requireContext().getSharedPreferences("userDetails",  Context.MODE_PRIVATE);
+        return preferences.getString("isAdmin", "0").equals("1");
     }
 
     public String getEmailAddress(){

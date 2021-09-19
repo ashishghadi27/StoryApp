@@ -2,65 +2,146 @@ package com.rootdevs.storyapp.Fragments;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.rootdevs.storyapp.Interfaces.AuthView;
+import com.rootdevs.storyapp.Presenters.AuthPresenter;
 import com.rootdevs.storyapp.R;
+import com.rootdevs.storyapp.Utils.BaseFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdatePassword#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class UpdatePassword extends Fragment {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class UpdatePassword extends BaseFragment implements AuthView {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String emailAddr;
+    private EditText newPass, confirmNewPass;
+    private RelativeLayout updatePass;
+    private AuthPresenter presenter;
+    private TextView signIn, signUp;
 
     public UpdatePassword() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdatePassword.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpdatePassword newInstance(String param1, String param2) {
-        UpdatePassword fragment = new UpdatePassword();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        Bundle bundle = getArguments();
+        assert bundle != null;
+        emailAddr = bundle.getString("email");
+        presenter = new AuthPresenter(getContext(), this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_password, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        newPass = view.findViewById(R.id.password);
+        confirmNewPass = view.findViewById(R.id.confirmPassword);
+        updatePass = view.findViewById(R.id.updatePass);
+        signIn = view.findViewById(R.id.signIn);
+        signUp = view.findViewById(R.id.signUp);
+        updatePass.setOnClickListener(view1 -> {
+            try {
+                updatePass(emailAddr, newPass.getText().toString().trim(), confirmNewPass.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
+        signIn.setOnClickListener(view1 -> {
+            replaceFragment(new SignIn(), "Signin");
+        });
+
+        signUp.setOnClickListener(view1 -> {
+            replaceFragment(new SignIn(), "Signup");
+        });
+    }
+
+    private void updatePass(String email, String pass, String confirmPass) throws JSONException {
+        if(!TextUtils.isEmpty(pass)){
+            if(!TextUtils.isEmpty(confirmPass)){
+                if(pass.equals(confirmPass))
+                    presenter.updatePass(email, pass);
+                else confirmNewPass.setError("Password Mismatch");
+            }
+            else confirmNewPass.setError("Field Cannot be Empty");
+        }
+        else newPass.setError("Field Cannot be Empty");
+    }
+
+    @Override
+    public void signInSuccess(JSONObject jsonObject) {
+
+    }
+
+    @Override
+    public void signInFailure(VolleyError e) {
+
+    }
+
+    @Override
+    public void signUpSuccess(JSONObject jsonObject) {
+
+    }
+
+    @Override
+    public void signUpFailure(VolleyError e) {
+
+    }
+
+    @Override
+    public void otpReceived(JSONObject object) {
+
+    }
+
+    @Override
+    public void otpError(VolleyError e) {
+
+    }
+
+    @Override
+    public void passUpdated(JSONObject object) {
+        try {
+            if(object.getString("message").equals("Success")){
+                getAlertDialog("Reset Password", "Password Updated. Please Sign in", getContext()).show();
+                replaceFragment(new SignIn(), "Signin");
+            }
+        } catch (JSONException e) {
+            getAlertDialog("Reset Password Failed", "Something went wrong. Please try again later", getContext()).show();
+            replaceFragment(new OtpVerification(), "OtpVerification");
+            //e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passUpdateFailure(VolleyError e) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }
