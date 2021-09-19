@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.CategoriesFragment"
+    android:padding="10dp"
+    android:elevation="5dp"
+    android:id="@+id/card"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/middle_edittext">
+
+    <TextView
+        android:id="@+id/ques"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="18sp"
+        android:textColor="#252525"/>
+
+    <TextView
+        android:id="@+id/marks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5 mks"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="5dp"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:layout_below="@+id/ques"/>
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/remove"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:layout_below="@+id/marks"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/message_back"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans"
+            android:background="@drawable/allround_editext"
+            android:padding="15dp"
+            android:lines="2"
+            android:inputType="textMultiLine"
+            android:layout_gravity="top|left"
+            android:hint="Your answer here"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/saveMcq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="Save"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

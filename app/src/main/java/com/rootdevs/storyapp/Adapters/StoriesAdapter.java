@@ -81,6 +81,10 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.MyViewHo
             listener.deleteStory(story.getId());
         });
 
+        holder.cardView.setOnClickListener( view -> {
+            listener.onStoryClick(story);
+        });
+
     }
 
     @Override

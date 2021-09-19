@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bottom_sheet_back"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Assignment"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/ques"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_edittext"
+            android:hint="Question"
+            android:textColorHint="#a9a9a9"
+            android:textColor="#272626"
+            android:padding="20dp"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textSize="15sp"
+            android:fontFamily="@font/nunito_sans"
+            android:lineSpacingExtra="5.3sp"
+            />
+
+        <EditText
+            android:id="@+id/answer"
+            android:textColorHint="#a9a9a9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/middle_edittext"
+            android:hint="Answer"
+            android:gravity="top|left"
+            android:textColor="#272626"
+            android:padding="20dp"
+            android:textSize="15sp"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="-2dp"
+            android:fontFamily="@font/nunito_sans"
+            android:lineSpacingExtra="5.3sp"
+            />
+
+
+        <EditText
+            android:id="@+id/marks"
+            android:textColorHint="#a9a9a9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edittext"
+            android:hint="Marks"
+            android:gravity="top|left"
+            android:textColor="#272626"
+            android:padding="20dp"
+            android:textSize="15sp"
+            android:inputType="number"
+            android:maxLength="2"
+            android:layout_marginTop="-2dp"
+            android:fontFamily="@font/nunito_sans"
+            android:lineSpacingExtra="5.3sp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_filled_back"
+            android:layout_marginTop="20dp"
+            android:elevation="3dp"
+            android:padding="18dp"
+            android:id="@+id/submit">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Submit"
+                android:textColor="#fff"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="20sp"
+                android:drawablePadding="7dp"
+                app:drawableEndCompat="@drawable/ic_right_arrow" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -145,12 +145,12 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     @Override
     public void getStoriesSuccess(JSONObject object) {
         try {
-            Toast.makeText(requireContext(), "here",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(requireContext(), "here",Toast.LENGTH_SHORT).show();
             if(object.getString("message").equals("Success")){
                 list.clear();
                 JSONArray array = object.getJSONArray("response");
                 for(int i = 0; i < array.length(); i++){
-                    Toast.makeText(requireContext(), "In loop",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(requireContext(), "In loop",Toast.LENGTH_SHORT).show();
                     JSONObject obj = array.getJSONObject(i);
                     list.add(new StoryModel(
                             obj.getString("storyId"),
@@ -160,7 +160,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
                             obj.getString("content"),
                             obj.getString("featuredLink")));
                 }
-                Toast.makeText(requireContext(), "OutSide loop",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(requireContext(), "OutSide loop",Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
@@ -177,7 +177,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     @Override
     public void addStorySuccess(JSONObject object) {
         try {
-            if(object.getString("message").equals("File uploaded")){
+            if(object.getString("message").equals("Success")){
                 bottom_sheet_dialog.dismiss();
                 getAlertDialog("Success", "Story Added Successfully", getContext()).show();
                 presenter.getStories(categoryId);
@@ -313,8 +313,19 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     }
 
     @Override
-    public void onStoryClick(String id) {
+    public void onStoryClick(StoryModel story) {
+        Bundle args = new Bundle();
+        args.putString("storyId",story.getId());
+        args.putString("storyName",story.getStoryName());
+        args.putString("categoryId",story.getCategoryId());
+        args.putString("storySummary",story.getStorySummary());
+        args.putString("content",story.getContent());
+        args.putString("featuredLink",story.getFeaturedLink());
 
+        FullStoryFragment fragment = new FullStoryFragment();
+        fragment.setArguments(args);
+
+        addFragment(fragment, "Fullstory");
     }
 
     @Override

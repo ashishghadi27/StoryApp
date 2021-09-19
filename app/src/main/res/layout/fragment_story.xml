@@ -31,6 +31,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/profile_circle_back"
             android:padding="5dp"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:src="@drawable/user"
             />
@@ -48,7 +49,7 @@
         android:layout_below="@+id/topbar"
         android:layout_margin="10dp"
         android:background="@drawable/message_back"
-        android:padding="5dp"/>
+        android:padding="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

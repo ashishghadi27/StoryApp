@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".Fragments.FullStoryFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/topbar_back"
+        android:padding="15dp"
+        android:id="@+id/topbar"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/storyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stories"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/mcqs"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/mcq"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/assign"
+            android:layout_marginEnd="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/assign"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/assign"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/topbar"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/storyImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/user"
+                android:scaleType="centerCrop"
+                android:elevation="5dp"
+                android:background="@drawable/message_back"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Summary"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textColor="@color/colorAccent"
+                />
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is small description of thr above category. Checkout"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_sans"
+                android:layout_marginTop="10dp"
+                android:textColor="#5C5959"
+                android:background="@drawable/message_back"
+                android:padding="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Story"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textColor="@color/colorAccent"
+
+                />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is small description of thr above category. Checkout"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_sans"
+                android:layout_marginTop="10dp"
+                android:textColor="#5C5959"
+                android:background="@drawable/message_back"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

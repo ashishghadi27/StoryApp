@@ -18,23 +18,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categories"
+            android:text="MCQ Sets"
             android:textColor="#000"
             android:layout_centerVertical="true"
             android:fontFamily="@font/nunito_sans_bold"
             android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/profile_circle_back"
-            android:padding="5dp"
-            android:visibility="gone"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/user"
-            />
 
     </RelativeLayout>
 
@@ -47,7 +36,7 @@
         android:id="@+id/recyclerView"/>
 
     <ImageView
-        android:id="@+id/addCategory"
+        android:id="@+id/addSet"
         android:visibility="gone"
         android:layout_width="60dp"
         android:layout_height="60dp"
