@@ -59,7 +59,7 @@
         android:id="@+id/recyclerView"/>
 
     <ImageView
-        android:id="@+id/addCategory"
+        android:id="@+id/addStory"
         android:visibility="gone"
         android:layout_width="60dp"
         android:layout_height="60dp"

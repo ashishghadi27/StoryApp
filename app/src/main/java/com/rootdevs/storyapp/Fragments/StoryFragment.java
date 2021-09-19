@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
@@ -41,6 +43,7 @@ import com.rootdevs.storyapp.R;
 import com.rootdevs.storyapp.Utils.BaseFragment;
 import com.rootdevs.storyapp.Utils.Constants;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,6 +64,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     private View bDialog;
     private StoryPresenter presenter;
     private ImageView addStory;
+    private TextView cName;
     private BottomSheetDialog bottom_sheet_dialog;
 
     public StoryFragment() {
@@ -72,7 +76,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         assert bundle != null;
-        this.categoryId = bundle.getString("id");
+        this.categoryId = bundle.getString("categoryId");
         this.categoryName = bundle.getString("categoryName");
         dialog = getProgressDialog("Please wait", "API Call in progress", false, getContext());
         presenter = new StoryPresenter(getContext(), this);
@@ -89,7 +93,9 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
-        addStory = view.findViewById(R.id.addCategory);
+        addStory = view.findViewById(R.id.addStory);
+        cName = view.findViewById(R.id.categoryName);
+        cName.setText(categoryName);
         if(isAdmin()) addStory.setVisibility(View.VISIBLE);
         list = new ArrayList<>();
         adapter = new StoriesAdapter(list, this, isAdmin(), requireContext());
@@ -138,12 +144,34 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
 
     @Override
     public void getStoriesSuccess(JSONObject object) {
-
+        try {
+            Toast.makeText(requireContext(), "here",Toast.LENGTH_SHORT).show();
+            if(object.getString("message").equals("Success")){
+                list.clear();
+                JSONArray array = object.getJSONArray("response");
+                for(int i = 0; i < array.length(); i++){
+                    Toast.makeText(requireContext(), "In loop",Toast.LENGTH_SHORT).show();
+                    JSONObject obj = array.getJSONObject(i);
+                    list.add(new StoryModel(
+                            obj.getString("storyId"),
+                            obj.getString("storyName"),
+                            obj.getString("categoryId"),
+                            obj.getString("storySummary"),
+                            obj.getString("content"),
+                            obj.getString("featuredLink")));
+                }
+                Toast.makeText(requireContext(), "OutSide loop",Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
+            }
+        } catch (JSONException e) {
+            getAlertDialog("Error", "Some Error Occurred", getContext()).show();
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void getStoriesFailure(VolleyError e) {
-
+        getAlertDialog("Error", "Some Error Occurred", getContext()).show();
     }
 
     @Override
@@ -152,6 +180,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
             if(object.getString("message").equals("File uploaded")){
                 bottom_sheet_dialog.dismiss();
                 getAlertDialog("Success", "Story Added Successfully", getContext()).show();
+                presenter.getStories(categoryId);
             }
             else getAlertDialog("Error", "Some Error Occurred", getContext()).show();
         } catch (JSONException e) {
@@ -169,18 +198,19 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
 
     @Override
     public void deleteStorySuccess(JSONObject object) {
-
+        getAlertDialog("Success", "Story Deleted", getContext()).show();
+        presenter.getStories(categoryId);
     }
 
     @Override
     public void deleteStoryFailure(VolleyError e) {
-
+        getAlertDialog("Error", "Some Error Occurred", getContext()).show();
     }
 
     @Override
     public void uploadImageSuccess(JSONObject object) {
         try {
-            if(object.getString("message").equals("File uploaded")){
+            if(object.getString("message").equals("File Uploaded")){
                 ImageView v = bDialog.findViewById(R.id.uploadImageView);
                 String link = object.getJSONObject("response").getString("fileDownloadUri");
                 this.featuredImage = link;
@@ -218,7 +248,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
         Button uploadImage;
 
         storyName = bDialog.findViewById(R.id.storyName);
-        summary = bDialog.findViewById(R.id.summary);
+        summary = bDialog.findViewById(R.id.storySummary);
         content = bDialog.findViewById(R.id.content);
         preview = bDialog.findViewById(R.id.uploadImageView);
         uploadImage = bDialog.findViewById(R.id.uploadImage);
@@ -289,6 +319,6 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
 
     @Override
     public void deleteStory(String id) {
-
+        presenter.deleteStory(id);
     }
 }

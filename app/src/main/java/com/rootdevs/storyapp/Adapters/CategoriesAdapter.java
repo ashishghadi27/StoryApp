@@ -66,7 +66,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         });
 
         holder.cardView.setOnClickListener(view -> {
-            listener.onCategoryClick(category.getCategoryId());
+            listener.onCategoryClick(category.getCategoryId(), category.getCategoryName());
         });
     }
 

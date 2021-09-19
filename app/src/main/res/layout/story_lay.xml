@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="This is small description of thr above category. Checkout"
                 android:textSize="18sp"
+                android:maxLines="2"
                 android:fontFamily="@font/nunito_sans"
                 android:layout_below="@+id/storyName"
                 android:layout_marginTop="5dp"

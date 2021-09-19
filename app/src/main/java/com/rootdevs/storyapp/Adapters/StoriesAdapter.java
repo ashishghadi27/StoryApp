@@ -17,6 +17,7 @@ import com.rootdevs.storyapp.Interfaces.StoryClickListener;
 import com.rootdevs.storyapp.Models.CategoryModel;
 import com.rootdevs.storyapp.Models.StoryModel;
 import com.rootdevs.storyapp.R;
+import com.rootdevs.storyapp.Utils.Constants;
 
 import java.util.List;
 
@@ -66,8 +67,11 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.MyViewHo
         StoryModel story = list.get(position);
         holder.storyName.setText(story.getStoryName());
         holder.summary.setText(story.getStorySummary());
+        String link = story.getFeaturedLink();
+        if(link.contains("http://localhost"))
+            link = link.replace("http://localhost", Constants.domain);
         Glide.with(context)  //2
-                .load(story.getFeaturedLink()) //3
+                .load(link) //3
                 .centerCrop() //4
                 .placeholder(R.drawable.user) //5
                 .error(R.drawable.user)
@@ -81,6 +85,6 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 }

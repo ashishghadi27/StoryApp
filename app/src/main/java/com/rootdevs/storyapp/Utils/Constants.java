@@ -2,7 +2,7 @@ package com.rootdevs.storyapp.Utils;
 
 public class Constants {
 
-    public static final String domain = "http://192.168.204.22:";
+    public static final String domain = "http://192.168.43.22:";
     private static final String portNo = "2798";
     private static final String domainSuffix = "/Story";
     private static final String finalDomain = domain + portNo + domainSuffix;

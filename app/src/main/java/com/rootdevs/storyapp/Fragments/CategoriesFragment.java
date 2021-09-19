@@ -189,8 +189,13 @@ public class CategoriesFragment extends BaseFragment implements StoryView, Categ
     }
 
     @Override
-    public void onCategoryClick(String id) {
-
+    public void onCategoryClick(String id, String name) {
+        StoryFragment fragment = new StoryFragment();
+        Bundle args = new Bundle();
+        args.putString("categoryId", id);
+        args.putString("categoryName", name);
+        fragment.setArguments(args);
+        addFragment(fragment, "Story");
     }
 
     @Override
