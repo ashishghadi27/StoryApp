@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.CategoriesFragment"
+    android:padding="10dp"
+    android:elevation="5dp"
+    android:id="@+id/card"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/middle_edittext">
+
+    <TextView
+        android:id="@+id/setName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Name"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="20sp"
+        android:textColor="#252525"/>
+
+    <TextView
+        android:id="@+id/storyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Story Name"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:textSize="20sp"
+        android:textColor="#252525"
+        android:layout_below="@+id/setName"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="18sp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:layout_below="@+id/storyName"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorAccent"
+        android:padding="5dp"/>
+
+
+</RelativeLayout>

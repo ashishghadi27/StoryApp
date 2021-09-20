@@ -2,7 +2,7 @@ package com.rootdevs.storyapp.Utils;
 
 public class Constants {
 
-    public static final String domain = "http://192.168.123.22:";
+    public static final String domain = "http://192.168.43.22:";
     private static final String portNo = "2798";
     private static final String domainSuffix = "/Story";
     private static final String finalDomain = domain + portNo + domainSuffix;
@@ -83,6 +83,12 @@ public class Constants {
 
     public static final String setAssignAnswerApi = finalDomain + "/users/saveAssignmentAnswer";
     public static final int setAssignAnswerRequestId = 1026;
+
+    public static final String getAllUsers = finalDomain + "/admin/allUsers";
+    public static final int getAllUsersRequestId = 1027;
+
+    public static final String getUsersScore = finalDomain + "//admin/getMCQSetsByUser?userId=";
+    public static final int getAllUsersScoreRequestId = 1028;
 
 
 }

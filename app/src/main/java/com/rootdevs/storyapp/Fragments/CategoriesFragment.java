@@ -43,7 +43,7 @@ public class CategoriesFragment extends BaseFragment implements StoryView, Categ
     private List<CategoryModel> list;
     private ProgressDialog dialog;
     private StoryPresenter presenter;
-    private ImageView addCategory;
+    private ImageView addCategory, users;
     private BottomSheetDialog bottom_sheet_dialog;
 
     public CategoriesFragment() {
@@ -69,12 +69,21 @@ public class CategoriesFragment extends BaseFragment implements StoryView, Categ
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         addCategory = view.findViewById(R.id.addCategory);
-        if(isAdmin()) addCategory.setVisibility(View.VISIBLE);
+        users = view.findViewById(R.id.users);
+        if(isAdmin()) {
+            addCategory.setVisibility(View.VISIBLE);
+            users.setVisibility(View.VISIBLE);
+        }
         list = new ArrayList<>();
         adapter = new CategoriesAdapter(list, this, isAdmin());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         presenter.getCategories();
+
+        users.setOnClickListener(view1 -> {
+            LoadUsersFragment fragment = new LoadUsersFragment();
+            addFragment(fragment, "load_users");
+        });
 
         addCategory.setOnClickListener(v -> {
             showBottomSheet();
