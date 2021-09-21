@@ -1,6 +1,7 @@
 package com.rootdevs.storyapp.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.rootdevs.storyapp.Activities.AuthActivity;
 import com.rootdevs.storyapp.Adapters.CategoriesAdapter;
 import com.rootdevs.storyapp.Interfaces.CategoryClickListener;
 import com.rootdevs.storyapp.Interfaces.StoryView;
@@ -43,7 +45,7 @@ public class CategoriesFragment extends BaseFragment implements StoryView, Categ
     private List<CategoryModel> list;
     private ProgressDialog dialog;
     private StoryPresenter presenter;
-    private ImageView addCategory, users;
+    private ImageView addCategory, users, logout;
     private BottomSheetDialog bottom_sheet_dialog;
 
     public CategoriesFragment() {
@@ -69,6 +71,15 @@ public class CategoriesFragment extends BaseFragment implements StoryView, Categ
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
         addCategory = view.findViewById(R.id.addCategory);
+        logout = view.findViewById(R.id.logout);
+
+        logout.setOnClickListener( view1 -> {
+            signOut();
+            Intent intent = new Intent(requireContext(), AuthActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
         users = view.findViewById(R.id.users);
         if(isAdmin()) {
             addCategory.setVisibility(View.VISIBLE);

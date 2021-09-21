@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".Fragments.CategoriesFragment"
     android:background="#fff">
 
@@ -16,6 +18,7 @@
         android:elevation="5dp">
 
         <TextView
+            android:id="@+id/categoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stories"
@@ -38,23 +41,10 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/categoryName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is small description of thr above category. Checkout"
-        android:textSize="18sp"
-        android:textColor="@color/colorAccent"
-        android:fontFamily="@font/nunito_sans"
-        android:layout_below="@+id/topbar"
-        android:layout_margin="10dp"
-        android:background="@drawable/message_back"
-        android:padding="10dp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/categoryName"
+        android:layout_below="@+id/topbar"
         android:layout_marginHorizontal="5dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/recyclerView"/>

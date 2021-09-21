@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_back"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".Fragments.SignIn">
 
     <ScrollView

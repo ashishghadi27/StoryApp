@@ -2,6 +2,7 @@ package com.rootdevs.storyapp.Presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.android.volley.VolleyError;
 import com.rootdevs.storyapp.Interfaces.ApiHandler;
@@ -49,6 +50,11 @@ public class StoryPresenter implements ApiHandler {
     public void uploadImage(Bitmap bitmap){
         view.showProgress();
         apiCaller.uploadBitmap(bitmap, Constants.uploadImageRequestId);
+    }
+
+    public void uploadVideo(Uri uri){
+        view.showProgress();
+        apiCaller.uploadVideo(uri, Constants.uploadImageRequestId);
     }
 
     public void getStories(String categoryId){

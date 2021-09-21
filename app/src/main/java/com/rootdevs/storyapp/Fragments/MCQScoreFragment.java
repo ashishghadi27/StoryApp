@@ -78,7 +78,7 @@ public class MCQScoreFragment extends BaseFragment implements ApiHandler {
 
     @Override
     public void success(JSONObject object, int requestId) {
-        if(requestId == Constants.getAllUsersRequestId){
+        if(requestId == Constants.getAllUsersScoreRequestId){
             dialog.dismiss();
             try {
                 if(object.getString("message").equals("Success")){
@@ -103,6 +103,7 @@ public class MCQScoreFragment extends BaseFragment implements ApiHandler {
 
     @Override
     public void failure(VolleyError e, int requestId) {
+        dialog.dismiss();
         getAlertDialog("Error", "Some Error Occurred", getContext()).show();
     }
 }

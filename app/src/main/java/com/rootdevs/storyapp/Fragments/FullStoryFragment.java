@@ -6,11 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.rootdevs.storyapp.R;
@@ -18,8 +22,10 @@ import com.rootdevs.storyapp.Utils.BaseFragment;
 
 public class FullStoryFragment extends BaseFragment {
 
-    private TextView name, summary, content;
-    private ImageView storyImage, mcqs, assign;
+    private TextView name, summary, content, summLabel, storyLabel;
+    private ImageView mcqs, assign;
+    private VideoView storyImage;
+    private Button mcqSec, assignSec;
     private String storyName, storySummary, storyContent, featuredLink, storyId;
 
     public FullStoryFragment() {
@@ -52,15 +58,33 @@ public class FullStoryFragment extends BaseFragment {
         name = view.findViewById(R.id.storyName);
         summary = view.findViewById(R.id.summary);
         content = view.findViewById(R.id.content);
+        summLabel = view.findViewById(R.id.summLabel);
+        storyLabel= view.findViewById(R.id.storyLabel);
         storyImage = view.findViewById(R.id.storyImage);
+        mcqSec = view.findViewById(R.id.mcqSec);
+        assignSec = view.findViewById(R.id.assignSec);
+        storyImage.setVideoPath(featuredLink);
+        storyImage.setMediaController(new MediaController(requireContext()));
+        storyImage.start();
         mcqs = view.findViewById(R.id.mcqs);
         assign = view.findViewById(R.id.assign);
 
         name.setText(storyName);
-        summary.setText(storySummary);
-        content.setText(storyContent);
+        if(!TextUtils.isEmpty(storySummary)){
+            summary.setText(storySummary);
+        }
+        else {
+            summLabel.setVisibility(View.GONE);
+            summary.setVisibility(View.GONE);
+        }
 
-        Glide.with(view).load(featuredLink).error(R.drawable.user).into(storyImage);
+        if(!TextUtils.isEmpty(storyContent)){
+            content.setText(storyContent);
+        }
+        else{
+            storyLabel.setVisibility(View.GONE);
+            content.setVisibility(View.GONE);
+        }
 
         mcqs.setOnClickListener(view1 -> {
             MCQSetFragment fragment = new MCQSetFragment();
@@ -79,5 +103,15 @@ public class FullStoryFragment extends BaseFragment {
             fragment.setArguments(bundle);
             addFragment(fragment, "MCQSet");
         });
+
+        mcqSec.setOnClickListener(view1 -> {
+            mcqs.performClick();
+        });
+
+        assignSec.setOnClickListener(view1 -> {
+            assign.performClick();
+        });
+
+
     }
 }

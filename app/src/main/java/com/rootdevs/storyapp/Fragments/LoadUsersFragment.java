@@ -99,6 +99,7 @@ public class LoadUsersFragment extends BaseFragment implements ApiHandler, UserC
 
     @Override
     public void failure(VolleyError e, int requestId) {
+        dialog.dismiss();
         getAlertDialog("Error", "Some Error Occurred", getContext()).show();
     }
 

@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".Fragments.FullStoryFragment">
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".Fragments.FullStoryFragment"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,11 +48,30 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_below="@id/topbar"
+        android:id="@+id/videoLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <VideoView
+            android:id="@+id/storyImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:elevation="5dp"/>
+
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/topbar"
+        android:layout_below="@+id/videoLay"
         android:layout_margin="5dp"
         android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,16 +79,8 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/storyImage"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/user"
-                android:scaleType="centerCrop"
-                android:elevation="5dp"
-                android:background="@drawable/message_back"/>
-
             <TextView
+                android:id="@+id/summLabel"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,6 +103,7 @@
                 android:padding="10dp"/>
 
             <TextView
+                android:id="@+id/storyLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Story"
@@ -109,7 +124,40 @@
                 android:layout_marginTop="10dp"
                 android:textColor="#5C5959"
                 android:background="@drawable/message_back"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/mcqSec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Go To MCQ Section"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nunito_sans_bold"/>
+
+                <Button
+                    android:id="@+id/assignSec"
+                    android:layout_below="@id/mcqSec"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Go To Assignment Section"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito_sans_bold"/>
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 

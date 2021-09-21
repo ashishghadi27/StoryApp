@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".Fragments.CategoriesFragment"
     android:background="#fff">
 
@@ -29,11 +31,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/profile_circle_back"
             android:padding="5dp"
-            android:visibility="gone"
-            android:layout_alignParentEnd="true"
+            android:layout_toStartOf="@+id/logout"
+            android:layout_marginEnd="15dp"
             android:src="@drawable/user"
+            />
+
+        <ImageView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:drawable/ic_lock_power_off"
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
             />
 
     </RelativeLayout>

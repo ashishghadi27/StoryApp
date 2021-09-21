@@ -211,12 +211,12 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
     public void uploadImageSuccess(JSONObject object) {
         try {
             if(object.getString("message").equals("File Uploaded")){
-                ImageView v = bDialog.findViewById(R.id.uploadImageView);
+                //ImageView v = bDialog.findViewById(R.id.uploadImageView);
                 String link = object.getJSONObject("response").getString("fileDownloadUri");
                 this.featuredImage = link;
                 if(link.contains("http://localhost"))
                     link = link.replace("http://localhost", Constants.domain);
-                Glide.with(requireContext()).load(link).centerCrop().into(v);
+                //Glide.with(requireContext()).load(link).centerCrop().into(v);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -255,7 +255,7 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
         submit = bDialog.findViewById(R.id.submit);
 
         uploadImage.setOnClickListener( view -> {
-            imagePicker();
+            videoPicker();
         });
 
         submit.setOnClickListener(v -> {
@@ -264,17 +264,11 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
             String cont = content.getText().toString().trim();
 
             if(!TextUtils.isEmpty(name)){
-                if(!TextUtils.isEmpty(summry)){
-                    if(!TextUtils.isEmpty(cont)){
                         if(featuredImage != null && !featuredImage.isEmpty()){
                             StoryModel story = new StoryModel(null, name, categoryId, summry, cont, featuredImage);
                             presenter.addStory(story);
                         }
                         else getAlertDialog("Missing Image", "Please Upload Image", getContext()).show();
-                    }
-                    else content.setError("Please Enter Story content");
-                }
-                else summary.setError("Please enter Story Summary");
             }
             else storyName.setError("Please enter Story Name");
         });
@@ -295,6 +289,13 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
         }
     }
 
+    public void videoPicker(){
+        Intent intent = new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Complete action using"), 200);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -309,6 +310,10 @@ public class StoryFragment extends BaseFragment implements StoryView, StoryClick
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else if (requestCode == 200 && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            presenter.uploadVideo(Uri.parse(String.valueOf(imageUri)));
         }
     }
 

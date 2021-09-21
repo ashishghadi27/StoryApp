@@ -1,6 +1,7 @@
 package com.rootdevs.storyapp.Adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,9 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.MyViewHo
 
         StoryModel story = list.get(position);
         holder.storyName.setText(story.getStoryName());
-        holder.summary.setText(story.getStorySummary());
+        if(!TextUtils.isEmpty(story.getStorySummary()))
+            holder.summary.setText(story.getStorySummary());
+        else holder.summary.setVisibility(View.GONE);
         String link = story.getFeaturedLink();
         if(link.contains("http://localhost"))
             link = link.replace("http://localhost", Constants.domain);
