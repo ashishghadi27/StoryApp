@@ -71,8 +71,8 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.MyViewHo
             holder.summary.setText(story.getStorySummary());
         else holder.summary.setVisibility(View.GONE);
         String link = story.getFeaturedLink();
-        if(link.contains("http://localhost"))
-            link = link.replace("http://localhost", Constants.domain);
+        if(link.contains("http://localhost:"))
+            link = link.replace("http://localhost:", Constants.domain);
         Glide.with(context)  //2
                 .load(link) //3
                 .centerCrop() //4

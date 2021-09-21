@@ -1,5 +1,7 @@
 package com.rootdevs.storyapp.Fragments;
 
+import android.app.ProgressDialog;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.rootdevs.storyapp.R;
 import com.rootdevs.storyapp.Utils.BaseFragment;
+import com.rootdevs.storyapp.Utils.Constants;
 
 public class FullStoryFragment extends BaseFragment {
 
@@ -26,6 +29,7 @@ public class FullStoryFragment extends BaseFragment {
     private ImageView mcqs, assign;
     private VideoView storyImage;
     private Button mcqSec, assignSec;
+    private ProgressDialog dialog;
     private String storyName, storySummary, storyContent, featuredLink, storyId;
 
     public FullStoryFragment() {
@@ -43,6 +47,7 @@ public class FullStoryFragment extends BaseFragment {
         storySummary = bundle.getString("storySummary");
         storyContent = bundle.getString("content");
         featuredLink = bundle.getString("featuredLink");
+        dialog = getProgressDialog("Please wait", "Loading Video", false, getContext());
     }
 
     @Override
@@ -63,9 +68,22 @@ public class FullStoryFragment extends BaseFragment {
         storyImage = view.findViewById(R.id.storyImage);
         mcqSec = view.findViewById(R.id.mcqSec);
         assignSec = view.findViewById(R.id.assignSec);
+
+        dialog.show();
+
+        if(featuredLink.contains("http://localhost:"))
+            featuredLink = featuredLink.replace("http://localhost:", Constants.domain);
+
         storyImage.setVideoPath(featuredLink);
+        storyImage.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                dialog.dismiss();
+            }
+        });
         storyImage.setMediaController(new MediaController(requireContext()));
         storyImage.start();
+
         mcqs = view.findViewById(R.id.mcqs);
         assign = view.findViewById(R.id.assign);
 

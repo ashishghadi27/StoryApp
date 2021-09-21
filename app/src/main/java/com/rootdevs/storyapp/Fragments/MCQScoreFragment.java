@@ -72,7 +72,7 @@ public class MCQScoreFragment extends BaseFragment implements ApiHandler {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         apiCaller = new APICaller(requireContext(), this);
-        apiCaller.getCall(Constants.getUsersScore, Constants.getAllUsersScoreRequestId);
+        apiCaller.getCall(Constants.getUsersScore + userId, Constants.getAllUsersScoreRequestId);
         dialog.show();
     }
 
@@ -89,7 +89,7 @@ public class MCQScoreFragment extends BaseFragment implements ApiHandler {
                         list.add(new ScoreModel(
                                 obj.getString("setName"),
                                 obj.getString("storyName"),
-                                obj.getString("Marks")
+                                obj.getString("marks")
                         ));
                     }
                     adapter.notifyDataSetChanged();
